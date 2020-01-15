@@ -1,0 +1,39 @@
+{
+  "name": "bronte-admin-express",
+  "version": "1.0.0",
+  "description": "bronte-admin-express",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmar8138/bronte-admin-express.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rmar8138/bronte-admin-express/issues"
+  },
+  "homepage": "https://github.com/rmar8138/bronte-admin-express#readme",
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "celebrate": "^11.0.1",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.7",
+    "mongoose-bcrypt": "^1.6.0",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
+  }
+}
