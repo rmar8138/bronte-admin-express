@@ -4,14 +4,14 @@ const AdminSchema = new Schema({
   email: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   password: {
     type: String,
     required: true,
     trim: true,
-    bcrypt: true
-  }
+    bcrypt: true,
+  },
 });
 
 AdminSchema.plugin(require("mongoose-bcrypt"));
