@@ -1,4 +1,6 @@
-//require model
+const AdminModel = require("./../database/models/admin_model");
+// const JWTService = require("./../services/jwt_service");
+//add JWT stuff
 
 async function login(req, res) {}
 
