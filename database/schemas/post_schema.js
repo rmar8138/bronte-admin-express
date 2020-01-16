@@ -1,6 +1,6 @@
 const { Schema } = require("mongoose");
 
-const BlogSchema = new Schema({
+const PostSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -11,4 +11,4 @@ const BlogSchema = new Schema({
   },
 });
 
-module.exports = BlogSchema;
+module.exports = PostSchema;
