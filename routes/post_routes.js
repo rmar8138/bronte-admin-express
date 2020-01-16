@@ -1,10 +1,12 @@
 const express = require("express");
+const { celebrate } = require("celebrate");
 const router = express.Router();
 const PostController = require("./../controllers/post_controller");
+const { validatePost } = require("./../middleware/celebrate");
 
 router.get("/", PostController.index);
 
-router.post("/", PostController.create);
+router.post("/", celebrate(validatePost), PostController.create);
 
 router.get("/:id", PostController.show);
 
