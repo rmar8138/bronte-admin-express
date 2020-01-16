@@ -7,6 +7,14 @@ const validatePost = {
   }),
 };
 
+const validateImage = {
+  [Segments.BODY]: Joi.object().keys({
+    url: Joi.string().required(),
+    caption: Joi.string().required(),
+  }),
+};
+
 module.exports = {
   validatePost,
+  validateImage,
 };
