@@ -1,5 +1,5 @@
 const AdminModel = require("./../database/models/admin_model");
-// const JWTService = require("./../services/jwt_service");
+const JWTService = require("./../services/jwt_service");
 //add JWT stuff
 
 async function register(req, res) {
@@ -17,7 +17,9 @@ async function login(req, res) {
     return res.json("Invalid credentials");
   }
 
-  return res.json("LOGGED IN!");
+  // send jwt token here
+  const token = JWTService.generateToken(admin);
+  return res.json(token);
 }
 
 async function logout(req, res) {}
