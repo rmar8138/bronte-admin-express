@@ -7,7 +7,7 @@ const postRoutes = require("./post_routes");
 
 router.get("/", (req, res) => res.send("WHITE MAGNUM"));
 
-router.use("/login", authRoutes);
+router.use("/auth", authRoutes);
 router.use("/email", emailRoutes);
 router.use("/images", imageRoutes);
 router.use("/posts", postRoutes);
