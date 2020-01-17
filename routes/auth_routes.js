@@ -17,8 +17,16 @@ router.post(
   AuthController.login,
 );
 
-router.get("/logout", AuthController.logout); //maybe delete
+router.get(
+  "/logout",
+  passport.authenticate("jwt", { session: false }),
+  AuthController.logout,
+);
 
-router.put("/update", AuthController.update);
+router.put(
+  "/update",
+  passport.authenticate("jwt", { session: false }),
+  AuthController.update,
+);
 
 module.exports = router;

@@ -6,12 +6,25 @@ const { validatePost } = require("./../middleware/celebrate");
 
 router.get("/", PostController.index);
 
-router.post("/", celebrate(validatePost), PostController.create);
+router.post(
+  "/",
+  celebrate(validatePost),
+  passport.authenticate("jwt", { session: false }),
+  PostController.create,
+);
 
 router.get("/:id", PostController.show);
 
-router.put("/:id", PostController.update);
+router.put(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  PostController.update,
+);
 
-router.delete("/:id", PostController.destroy);
+router.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  PostController.destroy,
+);
 
 module.exports = router;
