@@ -14,14 +14,27 @@ router.get("/:id", ImageController.show);
 
 // POST image
 
-router.post("/", ImageController.create);
+router.post(
+  "/",
+  celebrate(validateImage),
+  passport.authenticate("jwt", { session: false }),
+  ImageController.create,
+);
 
 // PUT image
 
-router.put("/:id", ImageController.update);
+router.put(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  ImageController.update,
+);
 
 // DELETE image
 
-router.delete("/:id", ImageController.destroy);
+router.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  ImageController.destroy,
+);
 
 module.exports = router;
