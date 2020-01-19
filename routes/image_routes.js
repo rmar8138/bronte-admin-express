@@ -14,7 +14,7 @@ router.get("/:id", ImageController.show);
 
 // POST image
 
-router.post("/", celebrate(validateImage), ImageController.create);
+router.post("/", ImageController.create);
 
 // PUT image
 
