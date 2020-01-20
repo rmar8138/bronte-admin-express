@@ -9,6 +9,11 @@ const PostSchema = new Schema({
     type: String,
     required: true,
   },
+  draft: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
 });
 
 module.exports = PostSchema;
