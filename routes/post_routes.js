@@ -4,6 +4,8 @@ const { celebrate } = require("celebrate");
 const router = express.Router();
 const PostController = require("./../controllers/post_controller");
 const { validatePost } = require("./../middleware/celebrate");
+const Seed = require("./../seed");
+
 
 router.get("/", PostController.index);
 
@@ -13,6 +15,8 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   PostController.create,
 );
+
+router.post("/seeded", Seed.seedPosts);
 
 router.get("/:id", PostController.show);
 

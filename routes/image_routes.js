@@ -4,10 +4,15 @@ const router = express.Router();
 const { celebrate } = require("celebrate");
 const ImageController = require("./../controllers/image_controller");
 const { validateImage } = require("./../middleware/celebrate");
+const Seed = require("./../seed");
 
 // GET all images
 
 router.get("/", ImageController.index);
+
+//GET SEEDED images
+
+router.get("/seeded", Seed.seedImages);
 
 // GET image by id
 

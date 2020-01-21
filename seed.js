@@ -2,7 +2,7 @@ const Post = require("./database/models/post_model");
 const Image = require("./database/models/image_model")
 
 
-function seedPosts(req, res) {
+async function seedPosts(req, res) {
 
     const samplePosts = [
         {
@@ -19,11 +19,11 @@ function seedPosts(req, res) {
     ];
 
     for (post of samplePosts) {
-        let newPost = new Post(post);
-        newPost.save();
+        await Post.create(post)
     }
 
-    res.send("Posts seeded!")
+    const posts = await Post.find();
+    res.json(posts)
 }
 
 
