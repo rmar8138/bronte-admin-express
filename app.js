@@ -2,6 +2,7 @@ const express = require("express");
 const expressSession = require("express-session");
 const MongoStore = require("connect-mongo")(expressSession);
 const mongoose = require("mongoose");
+const cors = require("cors");
 const passport = require("./config/passport");
 const cookieParser = require("cookie-parser");
 const { errors } = require("celebrate");
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 app.use(require("./routes"));
 app.use(errors());
 
