@@ -22,16 +22,9 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
-  const { caption } = req.body;
-  s3.upload(params, async (err, data) => {
-    if (err) console.log(err);
-
-    if (data) {
-      const url = data.Location;
-      const image = await ImageModel.create({ url, caption });
-      res.json(image);
-    }
-  });
+  const { url, caption } = req.body;
+  const image = await ImageModel.create({ url, caption });
+  res.json(image);
 }
 
 async function update(req, res) {
