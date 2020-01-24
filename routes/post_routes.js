@@ -10,7 +10,7 @@ router.get("/", PostController.index);
 router.post(
   "/",
   celebrate(validatePost),
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   PostController.create,
 );
 
@@ -18,13 +18,13 @@ router.get("/:id", PostController.show);
 
 router.put(
   "/:id",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   PostController.update,
 );
 
 router.delete(
   "/:id",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   PostController.destroy,
 );
 
