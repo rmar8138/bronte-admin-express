@@ -22,8 +22,8 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
-  const { url, caption } = req.body;
-  const image = await ImageModel.create({ url, caption });
+  const { url, caption, name } = req.body;
+  const image = await ImageModel.create({ url, caption, name });
   res.json(image);
 }
 

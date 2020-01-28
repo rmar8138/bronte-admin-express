@@ -18,6 +18,7 @@ const validateImage = {
   [Segments.BODY]: Joi.object().keys({
     url: Joi.string().required(),
     caption: Joi.string().required(),
+    name: Joi.string().required(),
   }),
 };
 
