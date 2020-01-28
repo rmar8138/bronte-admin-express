@@ -26,7 +26,7 @@ router.post(
 
 router.put(
   "/:id",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   ImageController.update,
 );
 
@@ -34,7 +34,7 @@ router.put(
 
 router.delete(
   "/:id",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   ImageController.destroy,
 );
 
