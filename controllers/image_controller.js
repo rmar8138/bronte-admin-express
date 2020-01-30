@@ -22,17 +22,22 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
-  const { url, caption, name } = req.body;
-  const image = await ImageModel.create({ url, caption, name });
+  const { url, caption, name, category } = req.body;
+  const image = await ImageModel.create({
+    url,
+    caption,
+    name,
+    category,
+  });
   res.json(image);
 }
 
 async function update(req, res) {
   const { id } = req.params;
-  const { caption } = req.body;
+  const { caption, category } = req.body;
   const image = await ImageModel.findByIdAndUpdate(
     id,
-    { caption },
+    { caption, category },
     { new: true },
   );
   res.json(image);

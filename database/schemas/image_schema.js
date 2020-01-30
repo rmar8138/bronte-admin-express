@@ -14,6 +14,11 @@ const ImageSchema = new Schema({
     required: true,
     trim: true,
   },
+  category: {
+    type: String,
+    enum: ["blackandwhite", "portrait", "landscape", "editorial"],
+    required: true,
+  },
 });
 
 module.exports = ImageSchema;
