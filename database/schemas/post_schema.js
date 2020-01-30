@@ -14,6 +14,12 @@ const PostSchema = new Schema({
     required: true,
     default: true,
   },
+  imageUrl: {
+    type: String,
+  },
+  imageName: {
+    type: String,
+  },
 });
 
 module.exports = PostSchema;

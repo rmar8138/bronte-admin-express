@@ -11,6 +11,8 @@ const validatePost = {
   [Segments.BODY]: Joi.object().keys({
     title: Joi.string().required(),
     body: Joi.string().required(),
+    imageUrl: Joi.string().required(),
+    imageName: Joi.string().required(),
   }),
 };
 
