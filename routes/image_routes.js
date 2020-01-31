@@ -1,24 +1,17 @@
 const express = require("express");
 const passport = require("passport");
+const multer = require("multer");
+const multerS3 = require("multer-s3");
 const router = express.Router();
 const { celebrate } = require("celebrate");
 const ImageController = require("./../controllers/image_controller");
 const { validateImage } = require("./../middleware/celebrate");
-const multer = require("multer");
-const multerS3 = require("multer-s3");
-const AWS = require("aws-sdk");
-
-AWS.config.update({
-  accessKeyId: process.env.S3_ACCESS_KEY,
-  secretAccessKey: process.env.S3_SECRET_KEY,
-});
-
-const s3 = new AWS.S3();
+const s3 = require("./../config/aws");
 
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: "bronte-portfolio",
+    bucket: process.env.S3_BUCKET_NAME,
     metadata: function(req, file, cb) {
       cb(null, {
         fieldName: file.fieldname,

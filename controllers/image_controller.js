@@ -1,30 +1,5 @@
-const multer = require("multer");
-const multerS3 = require("multer-s3");
-const AWS = require("aws-sdk");
-const fs = require("fs");
+const s3 = require("./../config/aws");
 const ImageModel = require("./../database/models/image_model");
-
-AWS.config.update({
-  accessKeyId: process.env.S3_ACCESS_KEY,
-  secretAccessKey: process.env.S3_SECRET_KEY,
-});
-
-const s3 = new AWS.S3();
-
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: "bronte-portfolio",
-    metadata: function(req, file, cb) {
-      cb(null, {
-        fieldName: file.fieldname,
-      });
-    },
-    key: function(req, file, cb) {
-      cb(null, file.originalname);
-    },
-  }),
-});
 
 async function index(req, res) {
   const images = await ImageModel.find();
@@ -70,8 +45,24 @@ async function show(req, res) {
 
 async function destroy(req, res) {
   const { id } = req.params;
+
+  // remove from mongodb
   const image = await ImageModel.findByIdAndRemove(id);
-  res.json(image);
+
+  // remove from s3
+  s3.deleteObject(
+    {
+      Bucket: process.env.S3_BUCKET_NAME,
+      Key: image.name,
+    },
+    (err, data) => {
+      if (err) {
+        return res.status(400).json(err);
+      }
+
+      return res.json(data);
+    },
+  );
 }
 
 module.exports = {
