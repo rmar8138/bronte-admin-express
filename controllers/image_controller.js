@@ -1,20 +1,5 @@
-const AWS = require("aws-sdk");
-const fs = require("fs");
+const s3 = require("./../config/aws");
 const ImageModel = require("./../database/models/image_model");
-
-AWS.config.update({
-  accessKeyId: process.env.S3_ACCESS_KEY,
-  secretAccessKey: process.env.S3_SECRET_KEY,
-});
-
-const s3 = new AWS.S3();
-const localImage = "./MAGNUM.jpg";
-
-const params = {
-  Bucket: "bronte-portfolio",
-  Body: fs.readFileSync(localImage),
-  Key: `${new Date().getTime()}.jpg`,
-};
 
 async function index(req, res) {
   const images = await ImageModel.find();
@@ -22,14 +7,24 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
-  const { url, caption, name, category } = req.body;
-  const image = await ImageModel.create({
-    url,
-    caption,
-    name,
-    category,
+
+  // set captions on each image
+  req.files.forEach((file, index) => {
+    file.caption = req.body[file.originalname];
   });
-  res.json(image);
+
+  const promises = req.files.map(file =>
+    ImageModel.create({
+      url: file.location,
+      caption: file.caption,
+      name: file.originalname,
+    }),
+  );
+
+  const response = await Promise.all(promises);
+  console.log(response);
+  res.json(response);
+
 }
 
 async function update(req, res) {
@@ -52,8 +47,24 @@ async function show(req, res) {
 
 async function destroy(req, res) {
   const { id } = req.params;
+
+  // remove from mongodb
   const image = await ImageModel.findByIdAndRemove(id);
-  res.json(image);
+
+  // remove from s3
+  s3.deleteObject(
+    {
+      Bucket: process.env.S3_BUCKET_NAME,
+      Key: image.name,
+    },
+    (err, data) => {
+      if (err) {
+        return res.status(400).json(err);
+      }
+
+      return res.json(data);
+    },
+  );
 }
 
 module.exports = {
