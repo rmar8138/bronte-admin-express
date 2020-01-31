@@ -10,10 +10,10 @@ router.post("/register", AuthController.register);
 router.post(
   "/login",
   celebrate(validateLogin),
-  // passport.authenticate("local", {
-  //   failureRedirect: "/login",
-  //   session: false,
-  // }),
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    session: false,
+  }),
   AuthController.login,
 );
 

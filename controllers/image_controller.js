@@ -1,3 +1,5 @@
+const multer = require("multer");
+const multerS3 = require("multer-s3");
 const AWS = require("aws-sdk");
 const fs = require("fs");
 const ImageModel = require("./../database/models/image_model");
@@ -8,13 +10,21 @@ AWS.config.update({
 });
 
 const s3 = new AWS.S3();
-const localImage = "./MAGNUM.jpg";
 
-const params = {
-  Bucket: "bronte-portfolio",
-  Body: fs.readFileSync(localImage),
-  Key: `${new Date().getTime()}.jpg`,
-};
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "bronte-portfolio",
+    metadata: function(req, file, cb) {
+      cb(null, {
+        fieldName: file.fieldname,
+      });
+    },
+    key: function(req, file, cb) {
+      cb(null, file.originalname);
+    },
+  }),
+});
 
 async function index(req, res) {
   const images = await ImageModel.find();
@@ -22,9 +32,22 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
-  const { url, caption, name } = req.body;
-  const image = await ImageModel.create({ url, caption, name });
-  res.json(image);
+  // set captions on each image
+  req.files.forEach((file, index) => {
+    file.caption = req.body[file.originalname];
+  });
+
+  const promises = req.files.map(file =>
+    ImageModel.create({
+      url: file.location,
+      caption: file.caption,
+      name: file.originalname,
+    }),
+  );
+
+  const response = await Promise.all(promises);
+  console.log(response);
+  res.json(response);
 }
 
 async function update(req, res) {
