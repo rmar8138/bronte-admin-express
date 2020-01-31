@@ -21,6 +21,7 @@ const validateImage = {
     url: Joi.string().required(),
     caption: Joi.string().required(),
     name: Joi.string().required(),
+    category: Joi.array().required(),
   }),
 };
 

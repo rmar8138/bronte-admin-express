@@ -7,6 +7,7 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
+
   // set captions on each image
   req.files.forEach((file, index) => {
     file.caption = req.body[file.originalname];
@@ -23,14 +24,15 @@ async function create(req, res) {
   const response = await Promise.all(promises);
   console.log(response);
   res.json(response);
+
 }
 
 async function update(req, res) {
   const { id } = req.params;
-  const { caption } = req.body;
+  const { caption, category } = req.body;
   const image = await ImageModel.findByIdAndUpdate(
     id,
-    { caption },
+    { caption, category },
     { new: true },
   );
   res.json(image);
