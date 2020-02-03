@@ -35,7 +35,7 @@ router.get("/:id", ImageController.show);
 
 router.post(
   "/",
-  upload.array("images"),
+  upload.array("files"),
   // celebrate(validateImage),
   // passport.authenticate("jwt", { session: false }),
   ImageController.create,

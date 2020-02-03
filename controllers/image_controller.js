@@ -7,24 +7,24 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
+  const promises = req.files.map(file => {
+    const data = JSON.parse(req.body[file.originalname]);
 
-  // set captions on each image
-  req.files.forEach((file, index) => {
-    file.caption = req.body[file.originalname];
+    return ImageModel.create({
+      url: file.location,
+      caption: data.caption,
+      category: data.category,
+      name: file.originalname,
+    });
   });
 
-  const promises = req.files.map(file =>
-    ImageModel.create({
-      url: file.location,
-      caption: file.caption,
-      name: file.originalname,
-    }),
-  );
-
-  const response = await Promise.all(promises);
-  console.log(response);
-  res.json(response);
-
+  try {
+    const response = await Promise.all(promises);
+    console.log(response);
+    res.json(response);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function update(req, res) {
