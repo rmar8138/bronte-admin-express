@@ -38,11 +38,18 @@ async function create(req, res) {
 } //need to lock down
 
 async function update(req, res) {
-  const { title, body } = req.body;
+  const {
+    title,
+    body,
+    imageUrl,
+    imageName,
+    imageId,
+    draft,
+  } = req.body;
   const { id } = req.params;
   const post = await PostModel.findByIdAndUpdate(
     id,
-    { title, body },
+    { title, body, imageUrl, imageName, imageId, draft },
     { new: true },
   );
   res.json(post);
