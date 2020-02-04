@@ -46,9 +46,11 @@ async function show(req, res) {
 
 async function destroy(req, res) {
   const { id } = req.params;
+  console.log(id);
 
   // remove from mongodb
   const image = await ImageModel.findByIdAndRemove(id);
+  console.log(image);
 
   // remove from s3
   s3.deleteObject(
