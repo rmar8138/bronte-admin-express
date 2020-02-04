@@ -20,6 +20,9 @@ const PostSchema = new Schema({
   imageName: {
     type: String,
   },
+  imageId: {
+    type: String,
+  },
 });
 
 module.exports = PostSchema;

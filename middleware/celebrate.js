@@ -13,6 +13,8 @@ const validatePost = {
     body: Joi.string().required(),
     imageUrl: Joi.string().required(),
     imageName: Joi.string().required(),
+    imageId: Joi.string().required(),
+    draft: Joi.boolean().required(),
   }),
 };
 

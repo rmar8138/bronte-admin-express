@@ -20,7 +20,6 @@ async function create(req, res) {
 
   try {
     const response = await Promise.all(promises);
-    console.log(response);
     res.json(response);
   } catch (error) {
     console.log(error);

@@ -12,14 +12,29 @@ async function show(req, res) {
 }
 
 async function create(req, res) {
-  const { title, body, imageUrl, imageName } = req.body;
-  const post = await PostModel.create({
+  const {
     title,
     body,
     imageUrl,
     imageName,
-  }).catch(err => res.status(500).send(err));
-  res.json(post);
+    imageId,
+    draft,
+  } = req.body;
+  try {
+    const post = await PostModel.create({
+      title,
+      body,
+      imageUrl,
+      imageName,
+      imageId,
+      draft,
+    });
+    console.log(post);
+    res.json(post);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
 } //need to lock down
 
 async function update(req, res) {

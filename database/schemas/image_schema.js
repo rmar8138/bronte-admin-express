@@ -3,7 +3,7 @@ const { Schema } = require("mongoose");
 const ImageSchema = new Schema({
   caption: {
     type: String,
-    required: true,
+    default: "",
   },
   url: {
     type: String,
@@ -17,7 +17,13 @@ const ImageSchema = new Schema({
   category: [
     {
       type: String,
-      enum: ["blackandwhite", "portrait", "landscape", "editorial"],
+      enum: [
+        "blackandwhite",
+        "portrait",
+        "landscape",
+        "editorial",
+        "post",
+      ],
       required: true,
     },
   ],
