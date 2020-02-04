@@ -37,7 +37,7 @@ router.post(
   "/",
   upload.array("files"),
   // celebrate(validateImage),
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   ImageController.create,
 );
 
@@ -45,7 +45,7 @@ router.post(
 
 router.put(
   "/:id",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   ImageController.update,
 );
 
@@ -53,7 +53,7 @@ router.put(
 
 router.delete(
   "/:id",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   ImageController.destroy,
 );
 
