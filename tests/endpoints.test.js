@@ -19,4 +19,25 @@ describe("testing blog posts endpoints", () => {
       .expect(200)
       .send();
   });
+
+  test("testing /auth endpoint", () => {
+    request(app)
+      .get("/auth")
+      .expect(200)
+      .send();
+  });
+
+  test("testing /images endpoint", () => {
+    request(app)
+      .get("/images")
+      .expect(200)
+      .send();
+  });
+
+  test("testing /email endpoint", () => {
+    request(app)
+      .get("/email")
+      .expect(200)
+      .send();
+  });
 });
