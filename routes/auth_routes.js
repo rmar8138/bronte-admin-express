@@ -17,12 +17,6 @@ router.post(
   AuthController.login,
 );
 
-router.get(
-  "/logout",
-  passport.authenticate("jwt", { session: false }),
-  AuthController.logout,
-);
-
 router.put(
   "/update",
   passport.authenticate("jwt", { session: false }),
