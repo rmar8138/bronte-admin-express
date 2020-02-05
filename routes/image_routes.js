@@ -18,7 +18,7 @@ const upload = multer({
       });
     },
     key: function(req, file, cb) {
-      cb(null, file.originalname);
+      cb(null, Date.now().toString());
     },
   }),
 });

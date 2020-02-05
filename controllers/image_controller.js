@@ -8,13 +8,14 @@ async function index(req, res) {
 
 async function create(req, res) {
   const promises = req.files.map(file => {
+    console.log(file);
     const data = JSON.parse(req.body[file.originalname]);
 
     return ImageModel.create({
       url: file.location,
       caption: data.caption,
       category: data.category,
-      name: file.originalname,
+      name: file.key,
     });
   });
 
