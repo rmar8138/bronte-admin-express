@@ -1,5 +1,5 @@
 const JWT = require("jsonwebtoken");
-// const expiry = "1m";
+const expiry = "1h";
 
 function generateToken(admin) {
   const token = JWT.sign(
@@ -9,7 +9,7 @@ function generateToken(admin) {
     process.env.JWT_SECRET,
     {
       subject: admin.id.toString(),
-      // expiresIn: expiry
+      expiresIn: expiry,
     },
   );
   return token;
