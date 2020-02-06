@@ -5,8 +5,6 @@ const router = express.Router();
 const AuthController = require("./../controllers/auth_controller");
 const { validateLogin } = require("./../middleware/celebrate");
 
-router.post("/register", AuthController.register);
-
 router.post(
   "/login",
   // celebrate(validateLogin),
