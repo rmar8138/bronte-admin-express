@@ -12,14 +12,7 @@ async function show(req, res) {
 }
 
 async function create(req, res) {
-  const {
-    title,
-    body,
-    imageUrl,
-    imageName,
-    imageId,
-    draft,
-  } = req.body;
+  const { title, body, imageUrl, imageName, imageId } = req.body;
   try {
     const post = await PostModel.create({
       title,
@@ -27,7 +20,6 @@ async function create(req, res) {
       imageUrl,
       imageName,
       imageId,
-      draft,
     });
     console.log(post);
     res.json(post);
@@ -38,18 +30,11 @@ async function create(req, res) {
 } //need to lock down
 
 async function update(req, res) {
-  const {
-    title,
-    body,
-    imageUrl,
-    imageName,
-    imageId,
-    draft,
-  } = req.body;
+  const { title, body, imageUrl, imageName, imageId } = req.body;
   const { id } = req.params;
   const post = await PostModel.findByIdAndUpdate(
     id,
-    { title, body, imageUrl, imageName, imageId, draft },
+    { title, body, imageUrl, imageName, imageId },
     { new: true },
   );
   res.json(post);

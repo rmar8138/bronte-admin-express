@@ -9,7 +9,7 @@ router.get("/", PostController.index);
 
 router.post(
   "/",
-  // celebrate(validatePost),
+  celebrate(validatePost),
   passport.authenticate("jwt", { session: false }),
   PostController.create,
 );
@@ -18,6 +18,7 @@ router.get("/:id", PostController.show);
 
 router.put(
   "/:id",
+  celebrate(validatePost),
   passport.authenticate("jwt", { session: false }),
   PostController.update,
 );
