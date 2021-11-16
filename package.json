@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^6.5.0",
-    "aws-sdk": "^2.605.0",
+    "aws-sdk": "^2.814.0",
     "celebrate": "^11.0.1",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.4",
